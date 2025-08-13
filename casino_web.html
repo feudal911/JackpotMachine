@@ -1,0 +1,2799 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎰 FEUDAL BET - CASINO PREMIUM 🎰</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #b8b8b8;
+            margin-bottom: 20px;
+        }
+
+        /* Controles de Áudio */
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Player de Música */
+        .music-player {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 15px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .track-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .track-name {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .track-artist {
+            font-size: 0.7rem;
+            color: #b8b8b8;
+        }
+
+        .music-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            color: #b8b8b8;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            transform: scale(1.1);
+        }
+
+        .audio-btn {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: #1a1a2e;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .audio-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .audio-btn.active {
+            background: linear-gradient(45deg, #10b981, #34d399);
+            color: white;
+        }
+
+        .audio-btn.muted {
+            background: linear-gradient(45deg, #ef4444, #f87171);
+            color: white;
+        }
+
+        .play-btn.playing {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #1a1a2e;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .volume-slider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .volume-slider input[type="range"] {
+            width: 100px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .volume-slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .volume-slider input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Carrossel de Propagandas */
+        .ad-carousel {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 30px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .ad-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #1a1a2e;
+        }
+
+        .ad-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .ad-overlay h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.2rem;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .ad-overlay p {
+            margin: 0;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 215, 0, 0.8);
+            border: none;
+            color: #1a1a2e;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255, 215, 0, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn.prev {
+            left: 10px;
+        }
+
+        .carousel-btn.next {
+            right: 10px;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: #ffd700;
+            transform: scale(1.2);
+        }
+
+        .indicator:hover {
+            background: rgba(255, 215, 0, 0.8);
+        }
+
+        /* Cobrinha Game */
+        .cobrinha-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        #cobrinhaCanvas {
+            border: 3px solid #ffd700;
+            border-radius: 15px;
+            background: #1a1a2e;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .cobrinha-info {
+            display: flex;
+            gap: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .cobrinha-info .score,
+        .cobrinha-info .multiplier {
+            text-align: center;
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .cobrinha-info .score span,
+        .cobrinha-info .multiplier span {
+            color: #10b981;
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+
+        /* Info Bar */
+        .info-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(22, 33, 62, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: slideInUp 1s ease-out;
+        }
+
+        .balance, .reload-btn {
+            text-align: center;
+        }
+
+        .game-selector {
+            text-align: center;
+            position: relative;
+        }
+
+        .game-selector::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), transparent, rgba(255, 215, 0, 0.1));
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .game-selector:hover::before {
+            opacity: 1;
+        }
+
+        .balance h3,         .game-selector h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .balance .amount {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4ade80;
+            text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+        }
+
+        .game-selector select {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+            min-width: 200px;
+            text-align: center;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffd700' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 20px;
+            padding-right: 45px;
+        }
+
+        .game-selector select:hover {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+            border-color: #ffed4e;
+        }
+
+        .game-selector select:focus {
+            outline: none;
+            border-color: #ffed4e;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.08));
+        }
+
+        .game-selector select option {
+            background: #1a1a2e;
+            color: white;
+            padding: 15px;
+            font-size: 1rem;
+            border: none;
+        }
+
+        .game-selector select option:hover {
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .reload-btn button {
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            border: none;
+            border-radius: 15px;
+            padding: 12px 25px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+        }
+
+        .reload-btn button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.5);
+        }
+
+        /* Game Area */
+        .game-area {
+            background: rgba(22, 33, 62, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .game-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Bet Controls */
+        .bet-controls {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .bet-amount {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        .bet-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .bet-btn {
+            background: linear-gradient(45deg, #ef4444, #dc2626);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 80px;
+        }
+
+        .bet-btn.positive {
+            background: linear-gradient(45deg, #10b981, #059669);
+        }
+
+        .bet-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Slot Machine */
+        .slot-machine {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .reels {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .reel {
+            background: linear-gradient(145deg, #0f3460, #16213e);
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            padding: 30px;
+            min-width: 120px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 
+                inset 0 0 20px rgba(255, 215, 0, 0.1),
+                0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .reel:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                inset 0 0 20px rgba(255, 215, 0, 0.2),
+                0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .spin-button {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border: none;
+            border-radius: 20px;
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1a1a2e;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+            min-width: 200px;
+        }
+
+        .spin-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 215, 0, 0.5);
+        }
+
+        .spin-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .stop-button {
+            background: linear-gradient(45deg, #10b981, #059669);
+            border: none;
+            border-radius: 15px;
+            padding: 15px 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+            min-width: 200px;
+            margin-left: 15px;
+        }
+        
+        .stop-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.5);
+        }
+        
+        .stop-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Result */
+        .result {
+            text-align: center;
+            font-size: 1.3rem;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .result.win {
+            background: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+            border: 2px solid #4ade80;
+        }
+
+        .result.lose {
+            background: rgba(248, 113, 113, 0.2);
+            color: #f87171;
+            border: 2px solid #f87171;
+        }
+
+        /* Rocket Game */
+        .rocket-area {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .rocket {
+            font-size: 8rem;
+            margin: 30px 0;
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .rocket.exploded {
+            animation: explode 0.5s ease-out;
+        }
+
+        .multiplier {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Roulette */
+        .roulette-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 5px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .roulette-number {
+            background: #dc2626;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 10px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .roulette-number.odd {
+            background: #1f2937;
+        }
+
+        .roulette-number.zero {
+            background: #059669;
+        }
+
+        .roulette-number:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Dice */
+        .dice-area {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .dice {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .die {
+            background: linear-gradient(145deg, #0f3460, #16213e);
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            padding: 30px;
+            min-width: 100px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .dice-sum {
+            font-size: 1.5rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        /* Fishing */
+        .fishing-area {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .fish-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .fish {
+            background: linear-gradient(145deg, #006994, #004d6b);
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            padding: 20px;
+            min-width: 80px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .fish:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .fish.caught {
+            background: #374151;
+            border-color: #6b7280;
+            opacity: 0.5;
+        }
+
+        /* Plinko Game */
+        .plinko-area {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .plinko-board {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, #0f3460, #16213e);
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .plinko-drop-zone {
+            height: 60px;
+            border-bottom: 2px solid #ffd700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .plinko-ball {
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .plinko-ball:hover {
+            transform: scale(1.2);
+        }
+
+        .plinko-pins {
+            height: 300px;
+            position: relative;
+            margin-bottom: 20px;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+        }
+
+        .plinko-buckets {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .bucket {
+            flex: 1;
+            background: linear-gradient(145deg, #ef4444, #dc2626);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 15px 10px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .bucket[data-multiplier="1.0"] {
+            background: linear-gradient(145deg, #10b981, #059669);
+        }
+
+        .bucket[data-multiplier="2.0"] {
+            background: linear-gradient(145deg, #f59e0b, #d97706);
+        }
+
+        .bucket[data-multiplier="5.0"] {
+            background: linear-gradient(145deg, #8b5cf6, #7c3aed);
+        }
+
+        .bucket[data-multiplier="10.0"] {
+            background: linear-gradient(145deg, #ec4899, #db2777);
+        }
+
+        /* Tigrinho Game */
+        .tigrinho-area {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .tigrinho-reels {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .tigrinho-reel {
+            background: linear-gradient(145deg, #0f3460, #16213e);
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            padding: 30px;
+            min-width: 120px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tigrinho-reel.winning {
+            border-color: #4ade80;
+            box-shadow: 0 0 30px rgba(74, 222, 128, 0.5);
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        .tigrinho-special {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 15px;
+            border: 2px solid #ffd700;
+        }
+
+        .special-symbol {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .special-text {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .info-bar {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .reels {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .roulette-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        /* Payment System Styles */
+        .add-money-btn {
+            background: linear-gradient(45deg, #10b981, #059669);
+            border: none;
+            border-radius: 10px;
+            padding: 8px 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .add-money-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .payment-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 25px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .payment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .payment-header h2 {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #ff6b6b;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 107, 107, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .payment-tabs {
+            display: flex;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 5px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #b8b8b8;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #1a1a2e;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ffd700;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .redeem-btn, .generate-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .redeem-btn {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .redeem-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .generate-btn {
+            background: linear-gradient(45deg, #8b5cf6, #7c3aed);
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .generate-info {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .generate-info p {
+            margin-bottom: 10px;
+            color: #b8b8b8;
+            line-height: 1.5;
+        }
+
+        .code-result {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin-top: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .code-result h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .generated-code, .generated-amount {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .generated-code strong, .generated-amount strong {
+            color: #1a1a2e;
+        }
+
+        .code-note {
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+            margin: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+                    <h1><i class="fas fa-dice"></i> FEUDAL BET - CASINO PREMIUM <i class="fas fa-dice"></i></h1>
+        <p>Os melhores jogos das plataformas brasileiras com design moderno!</p>
+        
+        <!-- Controles de Áudio -->
+        <div class="audio-controls">
+            <!-- Player de Música -->
+            <div class="music-player">
+                <button id="playPauseBtn" class="audio-btn play-btn" title="Play/Pause Música">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="track-info">
+                    <span class="track-name">Anny - Orgulho</span>
+                    <span class="track-artist">@blxckoficial</span>
+                </div>
+                <div class="music-controls">
+                    <button id="prevTrack" class="control-btn" title="Música Anterior">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button id="nextTrack" class="control-btn" title="Próxima Música">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Controles de Áudio -->
+            <button id="toggleSound" class="audio-btn" title="Alternar Efeitos Sonoros">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <div class="volume-slider">
+                <input type="range" id="volumeControl" min="0" max="100" value="50" title="Controle de Volume">
+            </div>
+        </div>
+            
+            <!-- Carrossel de Propagandas -->
+            <div class="ad-carousel">
+                <div class="carousel-container">
+                    <div class="carousel-slide active">
+                        <img src="img/rocket.png" alt="Propaganda 1" class="ad-image">
+                        <div class="ad-overlay">
+                            <h3>🎰 PROMOÇÃO ESPECIAL!</h3>
+                            <p>Ganhe até 100x seu dinheiro no Rocket!</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="img/tiger.png" alt="Propaganda 2" class="ad-image">
+                        <div class="ad-overlay">
+                            <h3>🐯 TIGRINHO PREMIUM!</h3>
+                            <p>Jackpot progressivo com milhões em prêmios!</p>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="snake logo.png" alt="Jogo da Cobrinha" class="ad-image">
+                        <div class="ad-overlay">
+                            <h3>🎲 NOVO JOGO: COBRINHA!</h3>
+                            <p>Colete multiplicadores e evite as bombas!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Controles do Carrossel -->
+                <button class="carousel-btn prev" onclick="changeSlide(-1)">❮</button>
+                <button class="carousel-btn next" onclick="changeSlide(1)">❯</button>
+                
+                <!-- Indicadores -->
+                <div class="carousel-indicators">
+                    <span class="indicator active" onclick="goToSlide(0)"></span>
+                    <span class="indicator" onclick="goToSlide(1)"></span>
+                    <span class="indicator" onclick="goToSlide(2)"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Bar -->
+        <div class="info-bar">
+            <div class="balance">
+                <h3><i class="fas fa-coins"></i> SALDO</h3>
+                <div class="amount" id="balance">R$ 1.000,00</div>
+                <button class="add-money-btn" onclick="showPaymentModal()">
+                    <i class="fas fa-plus"></i> ADICIONAR DINHEIRO
+                </button>
+            </div>
+            
+            <div class="game-selector">
+                <h3><i class="fas fa-gamepad"></i> JOGO ATUAL</h3>
+                <select id="gameSelector" onchange="changeGame()">
+                    <option value="slot">Caça-Níquel</option>
+                    <option value="rocket">Rocket</option>
+                    <option value="roulette">Roleta</option>
+                    <option value="dice">Dados</option>
+                    <option value="fishing">Pesca</option>
+                    <option value="plinko">Plinko</option>
+                    <option value="tigrinho">Tigrinho</option>
+                    <option value="cobrinha">Cobrinha</option>
+                </select>
+            </div>
+            
+            <div class="reload-btn">
+                <button onclick="reloadBalance()">
+                    <i class="fas fa-sync-alt"></i> RECARREGAR
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Area -->
+        <div class="game-area">
+            <!-- Slot Machine -->
+            <div id="slotGame" class="game-content">
+                <h2 class="game-title"><i class="fas fa-slot-machine"></i> CAÇA-NÍQUEL TRADICIONAL</h2>
+                
+                <div class="bet-controls">
+                    <div class="bet-amount" id="slotBet">R$ 10,00</div>
+                    <div class="bet-buttons">
+                        <button class="bet-btn" onclick="changeBet('slot', -10)">-10</button>
+                        <button class="bet-btn" onclick="changeBet('slot', -1)">-1</button>
+                        <button class="bet-btn positive" onclick="changeBet('slot', 1)">+1</button>
+                        <button class="bet-btn positive" onclick="changeBet('slot', 10)">+10</button>
+                    </div>
+                </div>
+                
+                <div class="slot-machine">
+                    <div class="reels">
+                        <div class="reel" id="reel1">🎰</div>
+                        <div class="reel" id="reel2">🎰</div>
+                        <div class="reel" id="reel3">🎰</div>
+                    </div>
+                    
+                    <button class="spin-button" onclick="spinSlot()" id="spinButton">
+                        <i class="fas fa-play"></i> GIRAR!
+                    </button>
+                </div>
+                
+                <div class="result" id="slotResult">Aguardando giro...</div>
+            </div>
+
+            <!-- Rocket Game -->
+            <div id="rocketGame" class="game-content" style="display: none;">
+                <h2 class="game-title"><i class="fas fa-rocket"></i> ROCKET - JOGO DE MULTIPLICADOR</h2>
+                
+                <div class="bet-controls">
+                    <div class="bet-amount" id="rocketBet">R$ 10,00</div>
+                    <div class="bet-buttons">
+                        <button class="bet-btn" onclick="changeBet('rocket', -10)">-10</button>
+                        <button class="bet-btn" onclick="changeBet('rocket', -1)">-1</button>
+                        <button class="bet-btn positive" onclick="changeBet('rocket', 1)">+1</button>
+                        <button class="bet-btn positive" onclick="changeBet('rocket', 10)">+10</button>
+                    </div>
+                </div>
+                
+                <div class="rocket-area">
+                    <div class="rocket" id="rocket">🚀</div>
+                    <div class="multiplier" id="multiplier">Multiplicador: 1.00x</div>
+                    
+                    <button class="spin-button" onclick="startRocket()" id="rocketButton">
+                        <i class="fas fa-rocket"></i> APOSTAR!
+                    </button>
+                    
+                    <button class="stop-button" onclick="stopRocket()" id="stopRocketButton" style="display: none;">
+                        <i class="fas fa-hand-paper"></i> PARAR E GANHAR!
+                    </button>
+                </div>
+                
+                <div class="result" id="rocketResult">Clique em APOSTAR para iniciar!</div>
+            </div>
+
+            <!-- Roulette -->
+            <div id="rouletteGame" class="game-content" style="display: none;">
+                <h2 class="game-title"><i class="fas fa-circle-notch"></i> ROLETA EUROPEIA</h2>
+                
+                <div class="roulette-grid" id="rouletteGrid"></div>
+                
+                <div class="bet-controls">
+                    <div class="bet-amount" id="rouletteBet">R$ 10,00</div>
+                    <div class="bet-buttons">
+                        <button class="bet-btn" onclick="changeBet('roulette', -10)">-10</button>
+                        <button class="bet-btn" onclick="changeBet('roulette', -1)">-1</button>
+                        <button class="bet-btn positive" onclick="changeBet('roulette', 1)">+1</button>
+                        <button class="bet-btn positive" onclick="changeBet('roulette', 10)">+10</button>
+                    </div>
+                </div>
+                
+                <button class="spin-button" onclick="spinRoulette()">
+                    <i class="fas fa-circle-notch"></i> GIRAR ROLETA!
+                </button>
+                
+                <div class="result" id="rouletteResult">Clique em GIRAR para jogar!</div>
+            </div>
+
+            <!-- Dice Game -->
+            <div id="diceGame" class="game-content" style="display: none;">
+                <h2 class="game-title"><i class="fas fa-dice"></i> JOGO DE DADOS</h2>
+                
+                <div class="dice-area">
+                    <div class="dice">
+                        <div class="die" id="die1">⚀</div>
+                        <div class="die" id="die2">⚀</div>
+                    </div>
+                    <div class="dice-sum" id="diceSum">Soma: 2</div>
+                </div>
+                
+                <div class="bet-controls">
+                    <div class="bet-amount" id="diceBet">R$ 10,00</div>
+                    <div class="bet-buttons">
+                        <button class="bet-btn" onclick="changeBet('dice', -10)">-10</button>
+                        <button class="bet-btn" onclick="changeBet('roulette', -1)">-1</button>
+                        <button class="bet-btn positive" onclick="changeBet('dice', 1)">+1</button>
+                        <button class="bet-btn positive" onclick="changeBet('dice', 10)">+10</button>
+                    </div>
+                </div>
+                
+                <button class="spin-button" onclick="rollDice()">
+                    <i class="fas fa-dice"></i> ROLAR DADOS!
+                </button>
+                
+                <div class="result" id="diceResult">Clique em ROLAR para jogar!</div>
+            </div>
+
+            <!-- Fishing Game -->
+            <div id="fishingGame" class="game-content" style="display: none;">
+                <h2 class="game-title"><i class="fas fa-fish"></i> JOGO DE PESCA</h2>
+                
+                <div class="fishing-area">
+                    <div class="fish-container" id="fishContainer"></div>
+                </div>
+                
+                <div class="bet-controls">
+                    <div class="bet-amount" id="fishingBet">R$ 10,00</div>
+                    <div class="bet-buttons">
+                        <button class="bet-btn" onclick="changeBet('fishing', -10)">-10</button>
+                        <button class="bet-btn" onclick="changeBet('fishing', -1)">-1</button>
+                        <button class="bet-btn positive" onclick="changeBet('fishing', 1)">+1</button>
+                        <button class="bet-btn positive" onclick="changeBet('fishing', 10)">+10</button>
+                    </div>
+                </div>
+                
+                <div class="result" id="fishingResult">Clique nos peixes para pescar!</div>
+            </div>
+
+            <!-- Plinko Game -->
+            <div id="plinkoGame" class="game-content" style="display: none;">
+                <h2 class="game-title"><i class="fas fa-circle"></i> PLINKO - JOGO DE QUEDAS</h2>
+                
+                <div class="plinko-area">
+                    <div class="plinko-board" id="plinkoBoard">
+                        <div class="plinko-drop-zone">
+                            <div class="plinko-ball" id="plinkoBall">🔴</div>
+                        </div>
+                        <div class="plinko-pins"></div>
+                        <div class="plinko-buckets">
+                            <div class="bucket" data-multiplier="0.2">0.2x</div>
+                            <div class="bucket" data-multiplier="0.5">0.5x</div>
+                            <div class="bucket" data-multiplier="1.0">1.0x</div>
+                            <div class="bucket" data-multiplier="2.0">2.0x</div>
+                            <div class="bucket" data-multiplier="5.0">5.0x</div>
+                            <div class="bucket" data-multiplier="10.0">10.0x</div>
+                            <div class="bucket" data-multiplier="0.5">0.5x</div>
+                            <div class="bucket" data-multiplier="0.2">0.2x</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bet-controls">
+                    <div class="bet-amount" id="plinkoBet">R$ 10,00</div>
+                    <div class="bet-buttons">
+                        <button class="bet-btn" onclick="changeBet('plinko', -10)">-10</button>
+                        <button class="bet-btn" onclick="changeBet('plinko', -1)">-1</button>
+                        <button class="bet-btn positive" onclick="changeBet('plinko', 1)">+1</button>
+                        <button class="bet-btn positive" onclick="changeBet('plinko', 10)">+10</button>
+                    </div>
+                </div>
+                
+                <button class="spin-button" onclick="dropPlinko()" id="plinkoButton">
+                    <i class="fas fa-circle"></i> SOLTAR BOLA!
+                </button>
+                
+                <div class="result" id="plinkoResult">Clique em SOLTAR BOLA para jogar!</div>
+            </div>
+
+            <!-- Tigrinho Game -->
+            <div id="tigrinhoGame" class="game-content" style="display: none;">
+                <h2 class="game-title"><i class="fas fa-tiger"></i> TIGRINHO - SLOT BRASILEIRO</h2>
+                
+                <div class="tigrinho-area">
+                    <div class="tigrinho-reels">
+                        <div class="tigrinho-reel" id="tigrinhoReel1">🐯</div>
+                        <div class="tigrinho-reel" id="tigrinhoReel2">🐯</div>
+                        <div class="tigrinho-reel" id="tigrinhoReel3">🐯</div>
+                    </div>
+                    
+                    <div class="tigrinho-special">
+                        <div class="special-symbol" id="specialSymbol">🎰</div>
+                        <div class="special-text">Símbolo Especial</div>
+                    </div>
+                </div>
+                
+                <div class="bet-controls">
+                    <div class="bet-amount" id="tigrinhoBet">R$ 10,00</div>
+                    <div class="bet-buttons">
+                        <button class="bet-btn" onclick="changeBet('tigrinho', -10)">-10</button>
+                        <button class="bet-btn" onclick="changeBet('tigrinho', -1)">-1</button>
+                        <button class="bet-btn positive" onclick="changeBet('tigrinho', 1)">+1</button>
+                        <button class="bet-btn positive" onclick="changeBet('tigrinho', 10)">+10</button>
+                    </div>
+                </div>
+                
+                <button class="spin-button" onclick="spinTigrinho()" id="tigrinhoButton">
+                    <i class="fas fa-tiger"></i> GIRAR TIGRINHO!
+                </button>
+                
+                <div class="result" id="tigrinhoResult">Clique em GIRAR para jogar!</div>
+            </div>
+
+            <!-- Cobrinha Game -->
+            <div id="cobrinhaGame" class="game-content" style="display: none;">
+                <h2 class="game-title"><i class="fas fa-snake"></i> COBRINHA - JOGO DE MULTIPLICADORES</h2>
+                
+                <div class="bet-controls">
+                    <div class="bet-amount" id="cobrinhaBet">R$ 10,00</div>
+                    <div class="bet-buttons">
+                        <button class="bet-btn" onclick="changeBet('cobrinha', -10)">-10</button>
+                        <button class="bet-btn" onclick="changeBet('cobrinha', -1)">-1</button>
+                        <button class="bet-btn positive" onclick="changeBet('cobrinha', 1)">+1</button>
+                        <button class="bet-btn positive" onclick="changeBet('cobrinha', 10)">+10</button>
+                    </div>
+                </div>
+                
+                <div class="cobrinha-area">
+                    <canvas id="cobrinhaCanvas" width="400" height="400"></canvas>
+                    <div class="cobrinha-info">
+                        <div class="score">Pontuação: <span id="cobrinhaScore">0</span></div>
+                        <div class="multiplier">Multiplicador: <span id="cobrinhaMultiplier">1.00x</span></div>
+                    </div>
+                </div>
+                
+                <button class="spin-button" onclick="startCobrinha()" id="cobrinhaButton">
+                    <i class="fas fa-play"></i> INICIAR COBRINHA!
+                </button>
+                
+                <div class="result" id="cobrinhaResult">Clique em INICIAR para jogar!</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="payment-modal">
+        <div class="payment-content">
+            <div class="payment-header">
+                <h2><i class="fas fa-credit-card"></i> SISTEMA DE PAGAMENTO</h2>
+                <button class="close-btn" onclick="hidePaymentModal()">&times;</button>
+            </div>
+            
+            <div class="payment-tabs">
+                <button class="tab-btn active" onclick="showTab('redeem')">💳 Resgatar Código</button>
+                <button class="tab-btn" onclick="showTab('generate')">🔑 Gerar Códigos</button>
+            </div>
+            
+            <!-- Redeem Code Tab -->
+            <div id="redeemTab" class="tab-content active">
+                <div class="input-group">
+                    <label for="redeemCodeInput">Código de Resgate:</label>
+                    <input type="text" id="redeemCodeInput" placeholder="Digite o código aqui..." maxlength="16">
+                </div>
+                <button class="redeem-btn" onclick="redeemCode()">
+                    <i class="fas fa-check"></i> RESGATAR CÓDIGO
+                </button>
+            </div>
+            
+            <!-- Generate Codes Tab -->
+            <div id="generateTab" class="tab-content">
+                <div class="generate-info">
+                    <p>Gere códigos de resgate para adicionar dinheiro ao seu saldo.</p>
+                    <p>Os códigos são salvos automaticamente em um arquivo .txt</p>
+                </div>
+                <button class="generate-btn" onclick="generateRedeemCode()">
+                    <i class="fas fa-magic"></i> GERAR NOVO CÓDIGO
+                </button>
+                
+                <div id="codeGenerationResult" class="code-result" style="display: none;">
+                    <h3>🎉 Código Gerado com Sucesso!</h3>
+                    <div class="generated-code">
+                        <strong>Código:</strong> <span id="generatedCode"></span>
+                    </div>
+                    <div class="generated-amount">
+                        <strong>Valor:</strong> <span id="generatedAmount"></span>
+                    </div>
+                    <p class="code-note">O código foi salvo no arquivo "codigos_resgate.txt"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game state
+        let balance = 1000;
+        let currentGame = 'slot';
+        let bets = {
+            slot: 10,
+            rocket: 10,
+            roulette: 10,
+            dice: 10,
+            fishing: 10,
+            plinko: 10,
+            tigrinho: 10,
+            cobrinha: 10
+        };
+        let isSpinning = false;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDisplay();
+            setupRoulette();
+            setupFishing();
+            startCarousel();
+        });
+
+        // Carrossel de Propagandas
+        let currentSlide = 0;
+        let carouselInterval;
+
+        function startCarousel() {
+            // Auto-play a cada 5 segundos
+            carouselInterval = setInterval(() => {
+                changeSlide(1);
+            }, 5000);
+        }
+
+        function changeSlide(direction) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            // Remove classe active do slide atual
+            slides[currentSlide].classList.remove('active');
+            indicators[currentSlide].classList.remove('active');
+            
+            // Calcula o próximo slide
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            
+            // Adiciona classe active ao novo slide
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+        }
+
+        function goToSlide(slideIndex) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            // Remove classe active do slide atual
+            slides[currentSlide].classList.remove('active');
+            indicators[currentSlide].classList.remove('active');
+            
+            // Define o novo slide
+            currentSlide = slideIndex;
+            
+            // Adiciona classe active ao novo slide
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+        }
+
+        function pauseCarousel() {
+            clearInterval(carouselInterval);
+        }
+
+        function resumeCarousel() {
+            startCarousel();
+        }
+
+        // Change game
+        function changeGame() {
+            const game = document.getElementById('gameSelector').value;
+            currentGame = game;
+            
+            // Reset Rocket game if it's running
+            if (rocketInterval) {
+                clearInterval(rocketInterval);
+                rocketInterval = null;
+                
+                // Reset Rocket UI
+                const rocket = document.getElementById('rocket');
+                const multiplierDisplay = document.getElementById('multiplier');
+                const stopButton = document.getElementById('stopRocketButton');
+                
+                rocket.textContent = '🚀';
+                rocket.classList.remove('exploded');
+                multiplierDisplay.textContent = 'Multiplicador: 1.00x';
+                stopButton.style.display = 'none';
+                
+                // Reset button
+                const button = document.getElementById('rocketButton');
+                button.disabled = false;
+                button.innerHTML = '<i class="fas fa-rocket"></i> APOSTAR!';
+            }
+            
+            // Hide all games
+            document.querySelectorAll('.game-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Show selected game
+            document.getElementById(game + 'Game').style.display = 'block';
+        }
+
+        // Change bet
+        function changeBet(game, amount) {
+            const newBet = bets[game] + amount;
+            if (newBet >= 1 && newBet <= 10000 && newBet <= balance) {
+                bets[game] = newBet;
+                document.getElementById(game + 'Bet').textContent = `R$ ${newBet.toFixed(2).replace('.', ',')}`;
+            }
+        }
+
+        // Update display
+        function updateDisplay() {
+            document.getElementById('balance').textContent = `R$ ${balance.toFixed(2).replace('.', ',')}`;
+        }
+
+        // Reload balance
+        function reloadBalance() {
+            balance = 1000;
+            updateDisplay();
+            alert('Saldo recarregado para R$ 1.000,00!');
+        }
+
+        // Slot Machine
+        function spinSlot() {
+            if (isSpinning || bets.slot > balance) return;
+            
+            isSpinning = true;
+            balance -= bets.slot;
+            updateDisplay();
+            
+            const button = document.getElementById('spinButton');
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> GIRANDO...';
+            
+            // Animate reels
+            let spins = 0;
+            const spinInterval = setInterval(() => {
+                const symbols = ['🍎', '🍊', '🍇', '🍒', '💎', '7️⃣', '🎰', '⭐'];
+                document.getElementById('reel1').textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                document.getElementById('reel2').textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                document.getElementById('reel3').textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                
+                spins++;
+                if (spins >= 10) {
+                    clearInterval(spinInterval);
+                    finishSlotSpin();
+                }
+            }, 100);
+        }
+
+        function finishSlotSpin() {
+            const symbols = ['🍎', '🍊', '🍇', '🍒', '💎', '7️⃣', '🎰', '⭐'];
+            const finalReels = [
+                symbols[Math.floor(Math.random() * symbols.length)],
+                symbols[Math.floor(Math.random() * symbols.length)],
+                symbols[Math.floor(Math.random() * symbols.length)]
+            ];
+            
+            document.getElementById('reel1').textContent = finalReels[0];
+            document.getElementById('reel2').textContent = finalReels[1];
+            document.getElementById('reel3').textContent = finalReels[2];
+            
+            // Check win
+            const winnings = checkSlotWin(finalReels);
+            if (winnings > 0) {
+                balance += winnings;
+                document.getElementById('slotResult').textContent = `🎉 PARABÉNS! Você ganhou R$ ${winnings.toFixed(2).replace('.', ',')}!`;
+                document.getElementById('slotResult').className = 'result win';
+                playWinSound(); // 🎵 Som de vitória
+            } else {
+                document.getElementById('slotResult').textContent = '😔 Que pena! Tente novamente!';
+                document.getElementById('slotResult').className = 'result lose';
+                playLoseSound(); // 🎵 Som de derrota
+            }
+            
+            updateDisplay();
+            isSpinning = false;
+            
+            const button = document.getElementById('spinButton');
+            button.disabled = false;
+            button.innerHTML = '<i class="fas fa-play"></i> GIRAR!';
+        }
+
+        function checkSlotWin(reels) {
+            if (reels[0] === reels[1] && reels[1] === reels[2]) {
+                const symbol = reels[0];
+                if (symbol === '💎') return bets.slot * 10;
+                if (['🎰', '7️⃣', '⭐'].includes(symbol)) return bets.slot * 5;
+                return bets.slot * 3;
+            } else if (reels[0] === reels[1] || reels[1] === reels[2] || reels[0] === reels[2]) {
+                return bets.slot * 1.5;
+            }
+            return 0;
+        }
+
+        // Rocket Game
+        let rocketInterval = null;
+        let currentMultiplier = 1.0;
+        
+        function startRocket() {
+            if (bets.rocket > balance) return;
+            
+            balance -= bets.rocket;
+            updateDisplay();
+            
+            const button = document.getElementById('rocketButton');
+            const stopButton = document.getElementById('stopRocketButton');
+            
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> CRESCENDO...';
+            
+            // Show stop button
+            stopButton.style.display = 'inline-block';
+            stopButton.disabled = false;
+            
+            currentMultiplier = 1.0;
+            const rocket = document.getElementById('rocket');
+            const multiplierDisplay = document.getElementById('multiplier');
+            
+            rocketInterval = setInterval(() => {
+                if (Math.random() < 0.05) { // 5% chance to explode (reduzido)
+                    clearInterval(rocketInterval);
+                    rocketExplode();
+                    return;
+                }
+                
+                // Aumento gradativo baseado no multiplicador atual
+                let increment = 0.005; // Base muito lenta de 0.005
+                
+                if (currentMultiplier >= 1.5) increment = 0.01;      // 1.5x+ = +0.01
+                if (currentMultiplier >= 2.5) increment = 0.02;      // 2.5x+ = +0.02
+                if (currentMultiplier >= 4.0) increment = 0.03;      // 4x+ = +0.03
+                if (currentMultiplier >= 6.0) increment = 0.05;      // 6x+ = +0.05
+                if (currentMultiplier >= 8.0) increment = 0.08;      // 8x+ = +0.08
+                if (currentMultiplier >= 9.0) increment = 0.12;      // 9x+ = +0.12
+                
+                currentMultiplier += increment;
+                multiplierDisplay.textContent = `Multiplicador: ${currentMultiplier.toFixed(2)}x`;
+                
+                if (currentMultiplier >= 10.0) {
+                    clearInterval(rocketInterval);
+                    rocketWin(currentMultiplier);
+                }
+            }, 200); // Aumentado de 100ms para 200ms (mais lento)
+                }
+        
+        function stopRocket() {
+            if (rocketInterval) {
+                clearInterval(rocketInterval);
+                rocketInterval = null;
+                
+                // Calculate winnings
+                const winnings = bets.rocket * currentMultiplier;
+                balance += winnings;
+                
+                // Update display
+                updateDisplay();
+                
+                // Show result
+                document.getElementById('rocketResult').textContent = `🎉 PAROU! Foguete chegou a ${currentMultiplier.toFixed(2)}x! Ganhou R$ ${winnings.toFixed(2).replace('.', ',')}!`;
+                document.getElementById('rocketResult').className = 'result win';
+                
+                // Reset buttons
+                const button = document.getElementById('rocketButton');
+                const stopButton = document.getElementById('stopRocketButton');
+                
+                button.disabled = false;
+                button.innerHTML = '<i class="fas fa-rocket"></i> APOSTAR!';
+                stopButton.style.display = 'none';
+                
+                // Reset multiplier display
+                document.getElementById('multiplier').textContent = 'Multiplicador: 1.00x';
+            }
+        }
+        
+        function rocketExplode() {
+            if (rocketInterval) {
+                clearInterval(rocketInterval);
+                rocketInterval = null;
+            }
+            
+            const rocket = document.getElementById('rocket');
+            rocket.textContent = '💥';
+            rocket.classList.add('exploded');
+            
+            document.getElementById('rocketResult').textContent = '💥 BOOM! Foguete explodiu! Perdeu a aposta!';
+            document.getElementById('rocketResult').className = 'result lose';
+            playLoseSound(); // 🎵 Som de explosão
+            
+            const button = document.getElementById('rocketButton');
+            const stopButton = document.getElementById('stopRocketButton');
+            
+            button.disabled = false;
+            button.innerHTML = '<i class="fas fa-rocket"></i> APOSTAR!';
+            stopButton.style.display = 'none';
+            
+            setTimeout(() => {
+                rocket.textContent = '🚀';
+                rocket.classList.remove('exploded');
+            }, 2000);
+        }
+
+        function rocketWin(multiplier) {
+            if (rocketInterval) {
+                clearInterval(rocketInterval);
+                rocketInterval = null;
+            }
+            
+            const winnings = bets.rocket * multiplier;
+            balance += winnings;
+            
+            document.getElementById('rocketResult').textContent = `🎉 PARABÉNS! Foguete chegou a ${multiplier.toFixed(1)}x! Ganhou R$ ${winnings.toFixed(2).replace('.', ',')}!`;
+            document.getElementById('rocketResult').className = 'result win';
+            playWinSound(); // 🎵 Som de vitória
+            
+            const button = document.getElementById('rocketButton');
+            const stopButton = document.getElementById('stopRocketButton');
+            
+            button.disabled = false;
+            button.innerHTML = '<i class="fas fa-rocket"></i> APOSTAR!';
+            stopButton.style.display = 'none';
+            
+            updateDisplay();
+        }
+
+        // Roulette
+        function setupRoulette() {
+            const grid = document.getElementById('rouletteGrid');
+            for (let i = 0; i <= 36; i++) {
+                const button = document.createElement('button');
+                button.className = 'roulette-number';
+                button.textContent = i;
+                
+                if (i === 0) {
+                    button.classList.add('zero');
+                } else if (i % 2 === 0) {
+                    button.classList.add('even');
+                } else {
+                    button.classList.add('odd');
+                }
+                
+                grid.appendChild(button);
+            }
+        }
+
+        function spinRoulette() {
+            if (bets.roulette > balance) return;
+            
+            balance -= bets.roulette;
+            updateDisplay();
+            
+            const result = Math.floor(Math.random() * 37);
+            let winnings = 0;
+            
+            if (result === 0) {
+                winnings = bets.roulette * 35;
+            } else if (result % 2 === 0) {
+                winnings = bets.roulette * 2;
+            } else {
+                winnings = bets.roulette * 2;
+            }
+            
+            balance += winnings;
+            document.getElementById('rouletteResult').textContent = `🎲 Resultado: ${result}! Ganhou R$ ${winnings.toFixed(2).replace('.', ',')}!`;
+            document.getElementById('rouletteResult').className = 'result win';
+            playWinSound(); // 🎵 Som de vitória
+            
+            updateDisplay();
+        }
+
+        // Dice Game
+        function rollDice() {
+            if (bets.dice > balance) return;
+            
+            balance -= bets.dice;
+            updateDisplay();
+            
+            const dice1 = Math.floor(Math.random() * 6) + 1;
+            const dice2 = Math.floor(Math.random() * 6) + 1;
+            const total = dice1 + dice2;
+            
+            const diceSymbols = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+            document.getElementById('die1').textContent = diceSymbols[dice1 - 1];
+            document.getElementById('die2').textContent = diceSymbols[dice2 - 1];
+            document.getElementById('diceSum').textContent = `Soma: ${total}`;
+            
+            let winnings = 0;
+            if (total === 7 || total === 11) {
+                winnings = bets.dice * 2;
+                balance += winnings;
+                document.getElementById('diceResult').textContent = `🎉 PARABÉNS! Soma ${total}! Ganhou R$ ${winnings.toFixed(2).replace('.', ',')}!`;
+                document.getElementById('diceResult').className = 'result win';
+                playWinSound(); // 🎵 Som de vitória
+            } else {
+                document.getElementById('diceResult').textContent = `😔 Soma ${total}. Tente novamente!`;
+                document.getElementById('diceResult').className = 'result lose';
+                playLoseSound(); // 🎵 Som de derrota
+            }
+            
+            updateDisplay();
+        }
+
+        // Fishing Game
+        function setupFishing() {
+            const container = document.getElementById('fishContainer');
+            const fishTypes = ['🐟', '🐠', '🦈', '🐡', '🦑', '🦐', '🦞', '🦀'];
+            
+            fishTypes.forEach((fish, index) => {
+                const fishElement = document.createElement('div');
+                fishElement.className = 'fish';
+                fishElement.textContent = fish;
+                fishElement.onclick = () => catchFish(fish, index);
+                container.appendChild(fishElement);
+            });
+        }
+
+        function catchFish(fish, index) {
+            if (bets.fishing > balance) return;
+            
+            balance -= bets.fishing;
+            
+            const fishValues = {
+                '🐟': 1.5, '🐠': 2.0, '🦈': 3.0, '🐡': 2.5,
+                '🦑': 1.8, '🦐': 1.2, '🦞': 4.0, '🦀': 1.0
+            };
+            
+            const multiplier = fishValues[fish] || 1.0;
+            const winnings = bets.fishing * multiplier;
+            
+            balance += winnings;
+                            document.getElementById('fishingResult').textContent = `🎣 Pescou ${fish}! Multiplicador ${multiplier}x! Ganhou R$ ${winnings.toFixed(2).replace('.', ',')}!`;
+                document.getElementById('fishingResult').className = 'result win';
+                playWinSound(); // 🎵 Som de vitória
+            
+            // Mark fish as caught
+            const fishElements = document.querySelectorAll('.fish');
+            fishElements[index].classList.add('caught');
+            fishElements[index].textContent = '🌊';
+            
+            updateDisplay();
+        }
+
+        // Plinko Game
+        function dropPlinko() {
+            if (bets.plinko > balance) return;
+            
+            balance -= bets.plinko;
+            updateDisplay();
+            
+            const button = document.getElementById('plinkoButton');
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> CAINDO...';
+            
+            // Simulate ball falling with random path
+            const ball = document.getElementById('plinkoBall');
+            const result = simulatePlinkoDrop();
+            
+            // Animate ball falling
+            setTimeout(() => {
+                ball.style.transform = 'translateY(300px)';
+                ball.style.transition = 'transform 2s ease-in';
+                
+                setTimeout(() => {
+                    const winnings = bets.plinko * result.multiplier;
+                    balance += winnings;
+                    
+                    if (winnings > 0) {
+                                        document.getElementById('plinkoResult').textContent = `🎉 PARABÉNS! Bola caiu no ${result.multiplier}x! Ganhou R$ ${winnings.toFixed(2).replace('.', ',')}!`;
+                document.getElementById('plinkoResult').className = 'result win';
+                playWinSound(); // 🎵 Som de vitória
+            } else {
+                document.getElementById('plinkoResult').textContent = `😔 Bola caiu no ${result.multiplier}x. Tente novamente!`;
+                document.getElementById('plinkoResult').className = 'result lose';
+                playLoseSound(); // 🎵 Som de derrota
+            }
+                    
+                    // Reset ball position
+                    setTimeout(() => {
+                        ball.style.transform = 'translateY(0)';
+                        ball.style.transition = 'transform 0.5s ease-out';
+                    }, 1000);
+                    
+                    updateDisplay();
+                    button.disabled = false;
+                    button.innerHTML = '<i class="fas fa-circle"></i> SOLTAR BOLA!';
+                }, 2000);
+            }, 500);
+        }
+
+        function simulatePlinkoDrop() {
+            // Simulate the ball bouncing through pins
+            const multipliers = [0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 0.5, 0.2];
+            const weights = [0.3, 0.25, 0.2, 0.15, 0.05, 0.02, 0.25, 0.3]; // Probability weights
+            
+            let random = Math.random();
+            let cumulativeWeight = 0;
+            
+            for (let i = 0; i < weights.length; i++) {
+                cumulativeWeight += weights[i];
+                if (random <= cumulativeWeight) {
+                    return { multiplier: multipliers[i] };
+                }
+            }
+            
+            return { multiplier: 0.2 }; // Default fallback
+        }
+
+        // Tigrinho Game
+        function spinTigrinho() {
+            if (isSpinning || bets.tigrinho > balance) return;
+            
+            isSpinning = true;
+            balance -= bets.tigrinho;
+            updateDisplay();
+            
+            const button = document.getElementById('tigrinhoButton');
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> GIRANDO...';
+            
+            // Animate reels
+            let spins = 0;
+            const spinInterval = setInterval(() => {
+                const symbols = ['🐯', '🍎', '🍊', '🍇', '🍒', '💎', '7️⃣', '⭐', '🎰'];
+                document.getElementById('tigrinhoReel1').textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                document.getElementById('tigrinhoReel2').textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                document.getElementById('tigrinhoReel3').textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                
+                spins++;
+                if (spins >= 12) {
+                    clearInterval(spinInterval);
+                    finishTigrinhoSpin();
+                }
+            }, 100);
+        }
+
+        function finishTigrinhoSpin() {
+            const symbols = ['🐯', '🍎', '🍊', '🍇', '🍒', '💎', '7️⃣', '⭐', '🎰'];
+            const finalReels = [
+                symbols[Math.floor(Math.random() * symbols.length)],
+                symbols[Math.floor(Math.random() * symbols.length)],
+                symbols[Math.floor(Math.random() * symbols.length)]
+            ];
+            
+            document.getElementById('tigrinhoReel1').textContent = finalReels[0];
+            document.getElementById('tigrinhoReel2').textContent = finalReels[1];
+            document.getElementById('tigrinhoReel3').textContent = finalReels[2];
+            
+            // Check for special symbol
+            const specialSymbol = Math.random() < 0.1; // 10% chance
+            if (specialSymbol) {
+                document.getElementById('specialSymbol').textContent = '🎰';
+                document.getElementById('specialSymbol').style.animation = 'pulse 0.5s ease-in-out';
+            }
+            
+            // Check win
+            const winnings = checkTigrinhoWin(finalReels, specialSymbol);
+            if (winnings > 0) {
+                balance += winnings;
+                document.getElementById('tigrinhoResult').textContent = `🎉 PARABÉNS! Você ganhou R$ ${winnings.toFixed(2).replace('.', ',')}!`;
+                document.getElementById('tigrinhoResult').className = 'result win';
+                playWinSound(); // 🎵 Som de vitória
+                
+                // Highlight winning reels
+                finalReels.forEach((symbol, index) => {
+                    if (['🐯', '💎', '7️⃣'].includes(symbol)) {
+                        document.getElementById(`tigrinhoReel${index + 1}`).classList.add('winning');
+                        setTimeout(() => {
+                            document.getElementById(`tigrinhoReel${index + 1}`).classList.remove('winning');
+                        }, 2000);
+                    }
+                });
+            } else {
+                document.getElementById('tigrinhoResult').textContent = '😔 Que pena! Tente novamente!';
+                document.getElementById('tigrinhoResult').className = 'result lose';
+                playLoseSound(); // 🎵 Som de derrota
+            }
+            
+            updateDisplay();
+            isSpinning = false;
+            
+            const button = document.getElementById('tigrinhoButton');
+            button.disabled = false;
+            button.innerHTML = '<i class="fas fa-tiger"></i> GIRAR TIGRINHO!';
+        }
+
+        function checkTigrinhoWin(reels, specialSymbol) {
+            // Check for three tigers (highest payout)
+            if (reels[0] === '🐯' && reels[1] === '🐯' && reels[2] === '🐯') {
+                return bets.tigrinho * 20;
+            }
+            
+            // Check for three diamonds
+            if (reels[0] === '💎' && reels[1] === '💎' && reels[2] === '💎') {
+                return bets.tigrinho * 15;
+            }
+            
+            // Check for three sevens
+            if (reels[0] === '7️⃣' && reels[1] === '7️⃣' && reels[2] === '7️⃣') {
+                return bets.tigrinho * 10;
+            }
+            
+            // Check for three of any kind
+            if (reels[0] === reels[1] && reels[1] === reels[2]) {
+                return bets.tigrinho * 5;
+            }
+            
+            // Check for two tigers
+            if ((reels[0] === '🐯' && reels[1] === '🐯') || 
+                (reels[1] === '🐯' && reels[2] === '🐯') || 
+                (reels[0] === '🐯' && reels[2] === '🐯')) {
+                return bets.tigrinho * 3;
+            }
+            
+            // Check for two of any kind
+            if (reels[0] === reels[1] || reels[1] === reels[2] || reels[0] === reels[2]) {
+                return bets.tigrinho * 1.5;
+            }
+            
+            // Special symbol bonus
+            if (specialSymbol) {
+                return bets.tigrinho * 2;
+            }
+            
+            return 0;
+        }
+
+        // Cobrinha Game
+        let cobrinhaGame = null;
+        let cobrinhaScore = 0;
+        let cobrinhaMultiplier = 1.0;
+        let isCobrinhaPlaying = false;
+
+        function startCobrinha() {
+            if (bets.cobrinha > balance) return;
+            
+            balance -= bets.cobrinha;
+            updateDisplay();
+            
+            const button = document.getElementById('cobrinhaButton');
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-play"></i> JOGANDO...';
+            
+            isCobrinhaPlaying = true;
+            cobrinhaScore = 0;
+            cobrinhaMultiplier = 1.0;
+            
+            // Initialize game
+            initCobrinhaGame();
+            
+            // Update display
+            document.getElementById('cobrinhaScore').textContent = cobrinhaScore;
+            document.getElementById('cobrinhaMultiplier').textContent = cobrinhaMultiplier.toFixed(2) + 'x';
+            document.getElementById('cobrinhaResult').textContent = 'Use as setas para controlar a cobrinha!';
+            document.getElementById('cobrinhaResult').className = 'result';
+        }
+
+        function initCobrinhaGame() {
+            const canvas = document.getElementById('cobrinhaCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Game settings
+            const gridSize = 20;
+            const tileCount = canvas.width / gridSize;
+            
+            // Snake initial position
+            let snake = [
+                {x: 10, y: 10}
+            ];
+            
+            // Food and bomb positions
+            let food = generateFood(snake, tileCount);
+            let bomb = generateBomb(snake, tileCount, food);
+            
+            // Direction
+            let dx = 0;
+            let dy = 0;
+            
+            // Game loop
+            function gameLoop() {
+                if (!isCobrinhaPlaying) return;
+                
+                setTimeout(function() {
+                    clearCanvas();
+                    moveSnake();
+                    drawFood();
+                    drawBomb();
+                    drawSnake();
+                    checkCollision();
+                    
+                    if (isCobrinhaPlaying) {
+                        requestAnimationFrame(gameLoop);
+                    }
+                }, 100);
+            }
+            
+            // Clear canvas
+            function clearCanvas() {
+                ctx.fillStyle = '#1a1a2e';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw grid lines for better visibility
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+                ctx.lineWidth = 0.5;
+                for (let i = 0; i <= tileCount; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(i * gridSize, 0);
+                    ctx.lineTo(i * gridSize, canvas.height);
+                    ctx.stroke();
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(0, i * gridSize);
+                    ctx.lineTo(canvas.width, i * gridSize);
+                    ctx.stroke();
+                }
+            }
+            
+            // Move snake
+            function moveSnake() {
+                const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+                snake.unshift(head);
+                
+                // Check if snake ate food
+                if (head.x === food.x && head.y === food.y) {
+                    // Snake ate food - GOOD!
+                    cobrinhaScore += 10;
+                    cobrinhaMultiplier += 0.1;
+                    
+                    // Generate new food and bomb
+                    food = generateFood(snake, tileCount);
+                    bomb = generateBomb(snake, tileCount, food);
+                    
+                    // Update display
+                    document.getElementById('cobrinhaScore').textContent = cobrinhaScore;
+                    document.getElementById('cobrinhaMultiplier').textContent = cobrinhaMultiplier.toFixed(2) + 'x';
+                    
+                    // Show success message
+                    document.getElementById('cobrinhaResult').textContent = '✅ +10 pontos! Multiplicador aumentou!';
+                    document.getElementById('cobrinhaResult').className = 'result win';
+                    
+                    // Clear message after 1 second
+                    setTimeout(() => {
+                        document.getElementById('cobrinhaResult').textContent = 'Use as setas para controlar a cobrinha!';
+                        document.getElementById('cobrinhaResult').className = 'result';
+                    }, 1000);
+                }
+                
+                // Check if snake hit bomb
+                if (head.x === bomb.x && head.y === bomb.y) {
+                    // Snake hit bomb - GAME OVER!
+                    document.getElementById('cobrinhaResult').textContent = '💥 BOOM! Você bateu na bomba! Game Over!';
+                    document.getElementById('cobrinhaResult').className = 'result lose';
+                    gameOver();
+                    return;
+                }
+                
+                // Remove tail if didn't eat anything
+                if (head.x !== food.x || head.y !== food.y) {
+                    snake.pop();
+                }
+            }
+            
+            // Draw snake
+            function drawSnake() {
+                snake.forEach((segment, index) => {
+                    if (index === 0) {
+                        // Head - Golden color
+                        ctx.fillStyle = '#ffd700';
+                        ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
+                        
+                        // Draw eyes
+                        ctx.fillStyle = '#000';
+                        ctx.fillRect(segment.x * gridSize + 4, segment.y * gridSize + 4, 3, 3);
+                        ctx.fillRect(segment.x * gridSize + 13, segment.y * gridSize + 4, 3, 3);
+                    } else {
+                        // Body - Green color
+                        ctx.fillStyle = '#10b981';
+                        ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
+                    }
+                });
+            }
+            
+            // Draw food (GOOD item)
+            function drawFood() {
+                // Draw food as a green apple
+                ctx.fillStyle = '#22c55e';
+                ctx.fillRect(food.x * gridSize + 2, food.y * gridSize + 2, gridSize - 4, gridSize - 4);
+                
+                // Add shine effect
+                ctx.fillStyle = '#4ade80';
+                ctx.fillRect(food.x * gridSize + 4, food.y * gridSize + 4, 4, 4);
+                
+                // Add label
+                ctx.fillStyle = '#fff';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('🍎', food.x * gridSize + gridSize/2, food.y * gridSize + gridSize/2 + 4);
+            }
+            
+            // Draw bomb (BAD item)
+            function drawBomb() {
+                // Draw bomb as a red circle
+                ctx.fillStyle = '#ef4444';
+                ctx.beginPath();
+                ctx.arc(bomb.x * gridSize + gridSize/2, bomb.y * gridSize + gridSize/2, gridSize/2 - 2, 0, 2 * Math.PI);
+                ctx.fill();
+                
+                // Add fuse
+                ctx.strokeStyle = '#fbbf24';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(bomb.x * gridSize + gridSize/2, bomb.y * gridSize + gridSize/2 - gridSize/2);
+                ctx.lineTo(bomb.x * gridSize + gridSize/2 + 5, bomb.y * gridSize + gridSize/2 - gridSize/2 - 5);
+                ctx.stroke();
+                
+                // Add label
+                ctx.fillStyle = '#fff';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('💣', bomb.x * gridSize + gridSize/2, bomb.y * gridSize + gridSize/2 + 4);
+            }
+            
+            // Generate food
+            function generateFood(snake, tileCount) {
+                let newFood;
+                do {
+                    newFood = {
+                        x: Math.floor(Math.random() * tileCount),
+                        y: Math.floor(Math.random() * tileCount)
+                    };
+                } while (snake.some(segment => segment.x === newFood.x && segment.y === newFood.y));
+                return newFood;
+            }
+            
+            // Generate bomb
+            function generateBomb(snake, tileCount, food) {
+                let newBomb;
+                do {
+                    newBomb = {
+                        x: Math.floor(Math.random() * tileCount),
+                        y: Math.floor(Math.random() * tileCount)
+                    };
+                } while (
+                    snake.some(segment => segment.x === newBomb.x && segment.y === newBomb.y) ||
+                    (food.x === newBomb.x && food.y === newBomb.y)
+                );
+                return newBomb;
+            }
+            
+            // Check collision
+            function checkCollision() {
+                const head = snake[0];
+                
+                // Wall collision
+                if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
+                    document.getElementById('cobrinhaResult').textContent = '💥 CRASH! Você bateu na parede! Game Over!';
+                    document.getElementById('cobrinhaResult').className = 'result lose';
+                    gameOver();
+                    return;
+                }
+                
+                // Self collision
+                for (let i = 1; i < snake.length; i++) {
+                    if (head.x === snake[i].x && head.y === snake[i].y) {
+                        document.getElementById('cobrinhaResult').textContent = '💥 CRASH! Você bateu em si mesmo! Game Over!';
+                        document.getElementById('cobrinhaResult').className = 'result lose';
+                        gameOver();
+                        return;
+                    }
+                }
+            }
+            
+            // Game over
+            function gameOver() {
+                isCobrinhaPlaying = false;
+                
+                // Calculate winnings
+                const winnings = Math.floor(bets.cobrinha * cobrinhaMultiplier);
+                balance += winnings;
+                
+                // Update display
+                updateDisplay();
+                
+                const button = document.getElementById('cobrinhaButton');
+                button.disabled = false;
+                button.innerHTML = '<i class="fas fa-play"></i> INICIAR COBRINHA!';
+                
+                if (winnings > bets.cobrinha) {
+                    document.getElementById('cobrinhaResult').textContent = `🎉 PARABÉNS! Você ganhou R$ ${winnings.toFixed(2).replace('.', ',')}!`;
+                    document.getElementById('cobrinhaResult').className = 'result win';
+                    playWinSound(); // 🎵 Som de vitória
+                } else {
+                    document.getElementById('cobrinhaResult').textContent = '😔 Game Over! Tente novamente!';
+                    document.getElementById('cobrinhaResult').className = 'result lose';
+                    playLoseSound(); // 🎵 Som de derrota
+                }
+            }
+            
+            // Keyboard controls
+            document.addEventListener('keydown', function(e) {
+                if (!isCobrinhaPlaying) return;
+                
+                switch(e.key) {
+                    case 'ArrowUp':
+                        if (dy !== 1) { dx = 0; dy = -1; }
+                        break;
+                    case 'ArrowDown':
+                        if (dy !== -1) { dx = 0; dy = 1; }
+                        break;
+                    case 'ArrowLeft':
+                        if (dx !== 1) { dx = -1; dy = 0; }
+                        break;
+                    case 'ArrowRight':
+                        if (dx !== -1) { dx = 1; dy = 0; }
+                        break;
+                }
+            });
+            
+            // Start game loop
+            gameLoop();
+        }
+
+        // Payment System Functions
+        function showPaymentModal() {
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function hidePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        function generateRedeemCode() {
+            const code = 'CASINO' + Math.random().toString(36).substr(2, 8).toUpperCase();
+            const amount = Math.floor(Math.random() * 900) + 100; // R$ 100 to R$ 1000
+            
+            // Add to redeem codes list
+            const redeemCodes = JSON.parse(localStorage.getItem('redeemCodes') || '[]');
+            redeemCodes.push({ code, amount, used: false });
+            localStorage.setItem('redeemCodes', JSON.stringify(redeemCodes));
+            
+            // Save to file (simulated)
+            saveRedeemCodesToFile(redeemCodes);
+            
+            document.getElementById('generatedCode').textContent = code;
+            document.getElementById('generatedAmount').textContent = `R$ ${amount.toFixed(2).replace('.', ',')}`;
+            document.getElementById('codeGenerationResult').style.display = 'block';
+        }
+
+        function saveRedeemCodesToFile(codes) {
+            // In a real application, this would save to a server
+            // For now, we'll simulate it by creating a downloadable file
+            const content = codes.map(c => `${c.code} - R$ ${c.amount.toFixed(2)} - ${c.used ? 'USADO' : 'DISPONÍVEL'}`).join('\n');
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'codigos_resgate.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function redeemCode() {
+            const code = document.getElementById('redeemCodeInput').value.trim().toUpperCase();
+            if (!code) {
+                alert('Por favor, insira um código de resgate!');
+                return;
+            }
+
+            const redeemCodes = JSON.parse(localStorage.getItem('redeemCodes') || '[]');
+            const codeData = redeemCodes.find(c => c.code === code && !c.used);
+            
+            if (codeData) {
+                // Mark as used
+                codeData.used = true;
+                localStorage.setItem('redeemCodes', JSON.stringify(redeemCodes));
+                
+                // Add money to balance
+                balance += codeData.amount;
+                updateDisplay();
+                
+                // Save updated codes to file
+                saveRedeemCodesToFile(redeemCodes);
+                
+                alert(`🎉 Código resgatado com sucesso! Adicionado R$ ${codeData.amount.toFixed(2).replace('.', ',')} ao seu saldo!`);
+                document.getElementById('redeemCodeInput').value = '';
+                hidePaymentModal();
+            } else {
+                alert('❌ Código inválido ou já utilizado!');
+            }
+        }
+
+        // Sistema de Áudio
+        let backgroundMusic = null;
+        let soundEnabled = true;
+        let musicEnabled = true;
+        let currentVolume = 0.5;
+        let isPlaying = false;
+        let currentTrackIndex = 0;
+
+        // Playlist de músicas
+        const playlist = [
+            {
+                name: "Anny - Orgulho",
+                artist: "@blxckoficial",
+                file: "Anny - Orgulho ft. @blxckoficial.mp3"
+            }
+        ];
+
+        // Efeitos sonoros
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playSound(frequency, duration, type = 'sine') {
+            if (!soundEnabled) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = frequency;
+            oscillator.type = type;
+            
+            gainNode.gain.setValueAtTime(currentVolume * 0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration);
+        }
+
+        function playWinSound() {
+            playSound(800, 0.3, 'sine');
+            setTimeout(() => playSound(1000, 0.3, 'sine'), 150);
+            setTimeout(() => playSound(1200, 0.4, 'sine'), 300);
+        }
+
+        function playLoseSound() {
+            playSound(200, 0.5, 'sawtooth');
+            setTimeout(() => playSound(150, 0.5, 'sawtooth'), 200);
+        }
+
+        function playClickSound() {
+            playSound(600, 0.1, 'square');
+        }
+
+        function playSpinSound() {
+            playSound(400, 0.2, 'triangle');
+        }
+
+        // Funções do Player de Música
+        function loadTrack(trackIndex) {
+            if (backgroundMusic) {
+                backgroundMusic.pause();
+                backgroundMusic = null;
+            }
+            
+            const track = playlist[trackIndex];
+            backgroundMusic = new Audio(track.file);
+            backgroundMusic.volume = currentVolume;
+            backgroundMusic.loop = true;
+            
+            // Atualizar informações da música
+            document.querySelector('.track-name').textContent = track.name;
+            document.querySelector('.track-artist').textContent = track.artist;
+            
+            // Se a música estava tocando, continuar
+            if (isPlaying) {
+                backgroundMusic.play();
+            }
+        }
+
+        function playPause() {
+            if (!backgroundMusic) {
+                loadTrack(currentTrackIndex);
+            }
+            
+            if (isPlaying) {
+                backgroundMusic.pause();
+                isPlaying = false;
+                document.getElementById('playPauseBtn').innerHTML = '<i class="fas fa-play"></i>';
+                document.getElementById('playPauseBtn').classList.remove('playing');
+            } else {
+                backgroundMusic.play();
+                isPlaying = true;
+                document.getElementById('playPauseBtn').innerHTML = '<i class="fas fa-pause"></i>';
+                document.getElementById('playPauseBtn').classList.add('playing');
+            }
+        }
+
+        function nextTrack() {
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+            loadTrack(currentTrackIndex);
+        }
+
+        function prevTrack() {
+            currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+            loadTrack(currentTrackIndex);
+        }
+
+        // Controles de áudio
+        document.getElementById('playPauseBtn').addEventListener('click', playPause);
+        document.getElementById('nextTrack').addEventListener('click', nextTrack);
+        document.getElementById('prevTrack').addEventListener('click', prevTrack);
+
+        document.getElementById('toggleSound').addEventListener('click', function() {
+            soundEnabled = !soundEnabled;
+            this.classList.toggle('muted', !soundEnabled);
+            this.innerHTML = soundEnabled ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+        });
+
+        document.getElementById('volumeControl').addEventListener('input', function() {
+            currentVolume = this.value / 100;
+            if (backgroundMusic) {
+                backgroundMusic.volume = currentVolume;
+            }
+        });
+
+        // Carregar música inicial
+        loadTrack(currentTrackIndex);
+
+        // Adicionar efeitos sonoros aos botões
+        function addClickSounds() {
+            // Botões de aposta
+            document.querySelectorAll('.bet-btn').forEach(btn => {
+                btn.addEventListener('click', () => playClickSound());
+            });
+            
+            // Botões de jogo
+            document.querySelectorAll('.spin-button, .stop-button').forEach(btn => {
+                btn.addEventListener('click', () => playSpinSound());
+            });
+            
+            // Botões de navegação
+            document.querySelectorAll('.carousel-btn, .indicator').forEach(btn => {
+                btn.addEventListener('click', () => playClickSound());
+            });
+            
+            // Botões do modal
+            document.querySelectorAll('.tab-btn, .redeem-btn, .generate-btn, .close-btn').forEach(btn => {
+                btn.addEventListener('click', () => playClickSound());
+            });
+        }
+
+        // Load existing redeem codes on page load
+        window.addEventListener('load', function() {
+            if (!localStorage.getItem('redeemCodes')) {
+                localStorage.setItem('redeemCodes', JSON.stringify([]));
+            }
+            
+            // Inicializar controles de áudio
+            document.getElementById('volumeControl').value = currentVolume * 100;
+            
+            // Inicializar player de música
+            loadTrack(currentTrackIndex);
+            
+            // Adicionar sons aos botões
+            addClickSounds();
+        });
+    </script>
+</body>
+</html>
